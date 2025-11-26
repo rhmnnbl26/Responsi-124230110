@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'user_model.g.dart';
 
-// User model untuk Hive database (messy code)
+// User model untuk Hive database
 @HiveType(typeId: 0)
 class User extends HiveObject {
   @HiveField(0)
@@ -16,31 +16,16 @@ class User extends HiveObject {
 
   @HiveField(3)
   String? createdAt;
-  
-  // Unused field (intentional problem)
-  @HiveField(4)
-  int? loginCount;
 
   User({
     required this.username,
     required this.password,
     required this.email,
     this.createdAt,
-    this.loginCount,
   });
 
-  // Messy toString without proper formatting
   @override
   String toString() {
     return 'User: $username, $email';
-  }
-  
-  // Duplicate method (intentional problem)
-  String getUserInfo() {
-    return 'Username: $username, Email: $email';
-  }
-  
-  String getUserInfo2() {
-    return 'Username: $username, Email: $email';
   }
 }

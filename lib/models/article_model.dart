@@ -1,5 +1,3 @@
-/// Model class untuk data Article, Blog, dan Report dari Spaceflight News API
-/// Digunakan untuk mapping JSON response dari API ke object Dart
 class Article {
   final int id;
   final String title;
@@ -11,7 +9,6 @@ class Article {
   final String updatedAt;
   final bool featured;
 
-  /// Constructor untuk Article model
   Article({
     required this.id,
     required this.title,
@@ -24,7 +21,6 @@ class Article {
     required this.featured,
   });
 
-  /// Factory constructor untuk membuat Article object dari JSON
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
       id: json['id'] ?? 0,
@@ -39,7 +35,6 @@ class Article {
     );
   }
 
-  /// Method untuk convert Article object ke JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -54,14 +49,12 @@ class Article {
     };
   }
 
-  /// Override operator == untuk perbandingan object
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is Article && other.id == id;
   }
 
-  /// Override hashCode untuk digunakan di Set dan Map
   @override
   int get hashCode => id.hashCode;
 }

@@ -179,14 +179,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.favorite_border,
-              size: 120,
-              color: Colors.grey[300],
-            ),
-            
+            Icon(Icons.favorite_border, size: 120, color: Colors.grey[300]),
+
             const SizedBox(height: 24),
-            
+
             Text(
               'Belum Ada Favorit',
               style: TextStyle(
@@ -195,9 +191,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 color: Colors.grey[800],
               ),
             ),
-            
+
             const SizedBox(height: 12),
-            
+
             Text(
               'Tambahkan artikel favorit kamu dari halaman home dengan menekan icon ❤️',
               textAlign: TextAlign.center,
@@ -207,9 +203,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 height: 1.5,
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
@@ -218,11 +214,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               ),
               child: Column(
                 children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: Colors.red[700],
-                    size: 32,
-                  ),
+                  Icon(Icons.info_outline, color: Colors.red[700], size: 32),
                   const SizedBox(height: 12),
                   Text(
                     'Tips: Swipe ke kiri atau kanan untuk menghapus favorit',
@@ -300,29 +292,32 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       },
       confirmDismiss: (direction) async {
         return await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Hapus dari Favorit?'),
-            content: Text('Apakah Anda yakin ingin menghapus "${article.title}" dari favorit?'),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Batal'),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[700],
-                  foregroundColor: Colors.white,
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Hapus dari Favorit?'),
+                content: Text(
+                  'Apakah Anda yakin ingin menghapus "${article.title}" dari favorit?',
                 ),
-                child: const Text('Hapus'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text('Batal'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red[700],
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Hapus'),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ) ?? false;
+            ) ??
+            false;
       },
       child: _buildFavoriteCard(article),
     );
@@ -349,7 +344,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           children: [
             if (article.imageUrl.isNotEmpty)
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
                 child: CachedNetworkImage(
                   imageUrl: article.imageUrl,
                   height: 150,
@@ -385,11 +382,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.red[700],
-                        size: 24,
-                      ),
+                      Icon(Icons.favorite, color: Colors.red[700], size: 24),
                     ],
                   ),
                   const SizedBox(height: 8),

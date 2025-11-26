@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   bool _isLoading = false;
   bool _obscurePassword = true;
 
@@ -81,14 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Logo/Icon
-                  Icon(
-                    Icons.rocket_launch,
-                    size: 100,
-                    color: Colors.red[700],
-                  ),
-                  
+                  Icon(Icons.rocket_launch, size: 100, color: Colors.red[700]),
+
                   const SizedBox(height: 24),
-                  
+
                   // Title
                   Text(
                     'Spaceflight News',
@@ -99,21 +95,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  
+
                   const SizedBox(height: 8),
-                  
+
                   // Subtitle
                   Text(
                     'Login to continue',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                     textAlign: TextAlign.center,
                   ),
-                  
+
                   const SizedBox(height: 48),
-                  
+
                   // Username Field
                   TextFormField(
                     controller: _usernameController,
@@ -130,7 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red[700]!, width: 2),
+                        borderSide: BorderSide(
+                          color: Colors.red[700]!,
+                          width: 2,
+                        ),
                       ),
                     ),
                     validator: (value) {
@@ -141,9 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     textInputAction: TextInputAction.next,
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Password Field
                   TextFormField(
                     controller: _passwordController,
@@ -154,7 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                          _obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -171,7 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red[700]!, width: 2),
+                        borderSide: BorderSide(
+                          color: Colors.red[700]!,
+                          width: 2,
+                        ),
                       ),
                     ),
                     validator: (value) {
@@ -186,9 +187,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) => _handleLogin(),
                   ),
-                  
+
                   const SizedBox(height: 32),
-                  
+
                   // Login Button
                   SizedBox(
                     height: 50,
@@ -220,25 +221,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Register link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
                           );
                         },
                         child: Text(
@@ -252,9 +252,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Info text
                   Container(
                     padding: const EdgeInsets.all(16),

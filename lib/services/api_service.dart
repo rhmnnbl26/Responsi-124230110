@@ -6,7 +6,7 @@ enum ContentType { articles, blogs, reports }
 
 class ApiService {
   static const String baseUrl = 'https://api.spaceflightnewsapi.net/v4';
-  
+
   // Singleton instance
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
@@ -37,7 +37,7 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        
+
         if (data.containsKey('results')) {
           final List<dynamic> resultsList = data['results'];
           return resultsList.map((json) => Article.fromJson(json)).toList();
@@ -45,7 +45,9 @@ class ApiService {
           throw Exception('Invalid response format: missing results field');
         }
       } else {
-        throw Exception('Failed to load content. Status code: ${response.statusCode}');
+        throw Exception(
+          'Failed to load content. Status code: ${response.statusCode}',
+        );
       }
     } catch (e) {
       throw Exception('Error fetching content: $e');
@@ -79,7 +81,9 @@ class ApiService {
         final Map<String, dynamic> data = json.decode(response.body);
         return Article.fromJson(data);
       } else {
-        throw Exception('Failed to load content detail. Status code: ${response.statusCode}');
+        throw Exception(
+          'Failed to load content detail. Status code: ${response.statusCode}',
+        );
       }
     } catch (e) {
       throw Exception('Error fetching content detail: $e');
@@ -90,15 +94,15 @@ class ApiService {
   Future<List<Article>> searchContent(ContentType type, String query) async {
     try {
       final allContent = await getContent(type);
-      
+
       if (query.isEmpty) {
         return allContent;
       }
-      
+
       return allContent.where((article) {
         return article.title.toLowerCase().contains(query.toLowerCase()) ||
-               article.summary.toLowerCase().contains(query.toLowerCase()) ||
-               article.newsSite.toLowerCase().contains(query.toLowerCase());
+            article.summary.toLowerCase().contains(query.toLowerCase()) ||
+            article.newsSite.toLowerCase().contains(query.toLowerCase());
       }).toList();
     } catch (e) {
       throw Exception('Error searching content: $e');

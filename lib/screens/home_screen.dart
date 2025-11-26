@@ -70,9 +70,9 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
   bool _isLoading = false;
   String _errorMessage = '';
   String _username = '';
-  
+
   ContentType _selectedType = ContentType.articles;
-  
+
   final TextEditingController _searchController = TextEditingController();
   bool _isSearching = false;
 
@@ -105,7 +105,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
 
     try {
       final articles = await _apiService.getContent(_selectedType);
-      
+
       setState(() {
         _allArticles = articles;
         _displayedArticles = articles;
@@ -133,8 +133,8 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
       } else {
         _displayedArticles = _allArticles.where((article) {
           return article.title.toLowerCase().contains(query.toLowerCase()) ||
-                 article.summary.toLowerCase().contains(query.toLowerCase()) ||
-                 article.newsSite.toLowerCase().contains(query.toLowerCase());
+              article.summary.toLowerCase().contains(query.toLowerCase()) ||
+              article.newsSite.toLowerCase().contains(query.toLowerCase());
         }).toList();
       }
     });
@@ -142,7 +142,7 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
 
   Future<void> _toggleFavorite(Article article) async {
     final isFavorited = await _favoriteService.toggleFavorite(article);
-    
+
     setState(() {
       if (isFavorited) {
         _favoriteIds.add(article.id);
@@ -155,9 +155,9 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            isFavorited 
-                ? '${article.title} ditambahkan ke favorit' 
-                : '${article.title} dihapus dari favorit'
+            isFavorited
+                ? '${article.title} ditambahkan ke favorit'
+                : '${article.title} dihapus dari favorit',
           ),
           duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
@@ -245,28 +245,26 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
               });
               _loadData();
             },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<ContentType>>[
-              const PopupMenuItem<ContentType>(
-                value: ContentType.articles,
-                child: Text('Articles'),
-              ),
-              const PopupMenuItem<ContentType>(
-                value: ContentType.blogs,
-                child: Text('Blogs'),
-              ),
-              const PopupMenuItem<ContentType>(
-                value: ContentType.reports,
-                child: Text('Reports'),
-              ),
-            ],
+            itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<ContentType>>[
+                  const PopupMenuItem<ContentType>(
+                    value: ContentType.articles,
+                    child: Text('Articles'),
+                  ),
+                  const PopupMenuItem<ContentType>(
+                    value: ContentType.blogs,
+                    child: Text('Blogs'),
+                  ),
+                  const PopupMenuItem<ContentType>(
+                    value: ContentType.reports,
+                    child: Text('Reports'),
+                  ),
+                ],
           ),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _handleLogout,
-          ),
+          IconButton(icon: const Icon(Icons.logout), onPressed: _handleLogout),
         ],
       ),
-      
+
       body: RefreshIndicator(
         onRefresh: _refreshData,
         color: Colors.red[700],
@@ -379,7 +377,9 @@ class _ArticleListScreenState extends State<ArticleListScreen> {
           children: [
             if (article.imageUrl.isNotEmpty)
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
                 child: CachedNetworkImage(
                   imageUrl: article.imageUrl,
                   height: 200,

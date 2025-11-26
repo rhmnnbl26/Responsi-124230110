@@ -21,14 +21,13 @@ class UserAdapter extends TypeAdapter<User> {
       password: fields[1] as String,
       email: fields[2] as String,
       createdAt: fields[3] as String?,
-      loginCount: fields[4] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.username)
       ..writeByte(1)
@@ -36,9 +35,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(2)
       ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.createdAt)
-      ..writeByte(4)
-      ..write(obj.loginCount);
+      ..write(obj.createdAt);
   }
 
   @override

@@ -7,10 +7,7 @@ import '../services/favorite_service.dart';
 class DetailScreen extends StatefulWidget {
   final Article article;
 
-  const DetailScreen({
-    super.key,
-    required this.article,
-  });
+  const DetailScreen({super.key, required this.article});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -37,7 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Future<void> _toggleFavorite() async {
     final newStatus = await _favoriteService.toggleFavorite(widget.article);
-    
+
     setState(() {
       _isFavorite = newStatus;
     });
@@ -46,9 +43,9 @@ class _DetailScreenState extends State<DetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            newStatus 
-                ? '${widget.article.title} ditambahkan ke favorit' 
-                : '${widget.article.title} dihapus dari favorit'
+            newStatus
+                ? '${widget.article.title} ditambahkan ke favorit'
+                : '${widget.article.title} dihapus dari favorit',
           ),
           duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
@@ -61,9 +58,9 @@ class _DetailScreenState extends State<DetailScreen> {
     final Uri url = Uri.parse(widget.article.url);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not open URL')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Could not open URL')));
       }
     }
   }
@@ -97,17 +94,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
         ],
       ),
-      
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildHeader(),
-            _buildDetailSection(),
-          ],
+          children: [_buildHeader(), _buildDetailSection()],
         ),
       ),
-      
+
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _openUrl,
         backgroundColor: Colors.red[700],
@@ -124,16 +118,13 @@ class _DetailScreenState extends State<DetailScreen> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Colors.red[700]!,
-            Colors.red[400]!,
-          ],
+          colors: [Colors.red[700]!, Colors.red[400]!],
         ),
       ),
       child: Column(
         children: [
           const SizedBox(height: 20),
-          
+
           if (widget.article.imageUrl.isNotEmpty)
             CachedNetworkImage(
               imageUrl: widget.article.imageUrl,
@@ -151,9 +142,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: const Icon(Icons.error, size: 64, color: Colors.white),
               ),
             ),
-          
+
           const SizedBox(height: 20),
-          
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
@@ -166,7 +157,7 @@ class _DetailScreenState extends State<DetailScreen> {
               textAlign: TextAlign.center,
             ),
           ),
-          
+
           const SizedBox(height: 24),
         ],
       ),
@@ -181,61 +172,58 @@ class _DetailScreenState extends State<DetailScreen> {
         children: [
           const Text(
             'Informasi Detail',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           _buildDetailItem(
             icon: Icons.language,
             title: 'News Site',
             value: widget.article.newsSite,
             color: Colors.blue,
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           _buildDetailItem(
             icon: Icons.description,
             title: 'Summary',
             value: widget.article.summary,
             color: Colors.orange,
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           _buildDetailItem(
             icon: Icons.calendar_today,
             title: 'Published At',
             value: _formatDate(widget.article.publishedAt),
             color: Colors.green,
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           _buildDetailItem(
             icon: Icons.star,
             title: 'Featured',
             value: widget.article.featured ? 'Yes' : 'No',
             color: Colors.purple,
           ),
-          
+
           const SizedBox(height: 32),
-          
+
           Center(
             child: ElevatedButton.icon(
               onPressed: _toggleFavorite,
-              icon: Icon(
-                _isFavorite ? Icons.favorite : Icons.favorite_border,
-              ),
+              icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
               label: Text(
                 _isFavorite ? 'Hapus dari Favorit' : 'Tambah ke Favorit',
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: _isFavorite ? Colors.grey[700] : Colors.red[700],
+                backgroundColor: _isFavorite
+                    ? Colors.grey[700]
+                    : Colors.red[700],
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -247,7 +235,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 80),
         ],
       ),
@@ -279,9 +267,9 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             child: Icon(icon, color: color, size: 24),
           ),
-          
+
           const SizedBox(width: 16),
-          
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

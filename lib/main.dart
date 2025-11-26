@@ -9,13 +9,13 @@ import 'dart:async';
 /// Entry point aplikasi Spaceflight News
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize Hive (messy initialization)
+
+  // Initialize Hive
   await Hive.initFlutter();
-  if(!Hive.isAdapterRegistered(0)) {
+  if (!Hive.isAdapterRegistered(0)) {
     Hive.registerAdapter(UserAdapter());
   }
-  
+
   runApp(const MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Spaceflight News',
       debugShowCheckedModeBanner: false,
-      
+
       theme: ThemeData(
         primarySwatch: Colors.red,
         colorScheme: ColorScheme.fromSeed(
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      
+
       home: const SplashScreen(),
     );
   }
@@ -79,15 +79,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkAuthStatus() async {
     await Future.delayed(const Duration(seconds: 1));
-    
+
     final isLoggedIn = await _authService.isLoggedIn();
-    
+
     if (mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => isLoggedIn 
-              ? const HomeScreen() 
-              : const LoginScreen(),
+          builder: (context) =>
+              isLoggedIn ? const HomeScreen() : const LoginScreen(),
         ),
       );
     }
@@ -101,11 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.rocket_launch,
-              size: 120,
-              color: Colors.white,
-            ),
+            const Icon(Icons.rocket_launch, size: 120, color: Colors.white),
             const SizedBox(height: 24),
             const Text(
               'Spaceflight News',
@@ -116,9 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const CircularProgressIndicator(
-              color: Colors.white,
-            ),
+            const CircularProgressIndicator(color: Colors.white),
           ],
         ),
       ),
