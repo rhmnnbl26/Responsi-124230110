@@ -35,7 +35,7 @@ class FavoriteService {
       
       return _cachedFavorites!;
     } catch (e) {
-      print('Error loading favorites: $e');
+      ('Error loading favorites: $e');
       _cachedFavorites = [];
       return [];
     }
@@ -57,7 +57,7 @@ class FavoriteService {
       
       return success;
     } catch (e) {
-      print('Error saving favorites: $e');
+      ('Error saving favorites: $e');
       return false;
     }
   }
@@ -74,7 +74,7 @@ class FavoriteService {
       favorites.add(article);
       return await saveFavorites(favorites);
     } catch (e) {
-      print('Error adding favorite: $e');
+      ('Error adding favorite: $e');
       return false;
     }
   }
@@ -86,7 +86,7 @@ class FavoriteService {
       favorites.removeWhere((fav) => fav.id == article.id);
       return await saveFavorites(favorites);
     } catch (e) {
-      print('Error removing favorite: $e');
+      ('Error removing favorite: $e');
       return false;
     }
   }
@@ -122,7 +122,7 @@ class FavoriteService {
       
       return success;
     } catch (e) {
-      print('Error clearing favorites: $e');
+      ('Error clearing favorites: $e');
       return false;
     }
   }

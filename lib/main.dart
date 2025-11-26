@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'services/auth_service.dart';
+import 'models/user_model.dart';
+import 'dart:async';
 
 /// Entry point aplikasi Spaceflight News
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Hive (messy initialization)
+  await Hive.initFlutter();
+  if(!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(UserAdapter());
+  }
+  
   runApp(const MyApp());
 }
 
